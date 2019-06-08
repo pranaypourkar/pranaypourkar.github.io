@@ -1,2 +1,2 @@
 # pranaypourkar.github.io
-Shopping website (HTML & CSS project)
+Shopping website using HTML, CSS & Javascript
