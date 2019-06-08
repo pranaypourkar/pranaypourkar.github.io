@@ -37,7 +37,7 @@
           total = total + database.find(search).Price;
           price_list.push(database.find(search).Price);
           description_list.push(database.find(search).description);
-          arr_cart_img.push("F:/course/CGI_web/web/categories/" + database.find(search).img_location);
+          arr_cart_img.push("https://pranaypourkar.github.io/categories/" + database.find(search).img_location);
          }
  
         }
@@ -73,7 +73,7 @@ function table_payment()
                 {       
                     td.setAttribute('rowSpan', '1');
                     pic = document.createElement("IMG");
-                    pic.setAttribute("src","F:/course/CGI_web/web/images/cart_image.jpg");
+                    pic.setAttribute("src","https://pranaypourkar.github.io/images/cart_image.jpg");
                     pic.setAttribute("width", "250");
                     pic.setAttribute("height", "200");
                     td.appendChild(document.body.appendChild(pic));
@@ -120,7 +120,7 @@ function table_payment()
 
 btn.onclick = function() 
 {
-	location.href = "F:/course/CGI_web/web/order.html";
+	location.href = "https://pranaypourkar.github.io/order.html";
 };
 
 
@@ -128,7 +128,7 @@ btn.onclick = function()
 
 function order_page() 
         {
-			location.href = "F:/course/CGI_web/web/order.html";
+			location.href = "https://pranaypourkar.github.io/order.html";
 		} 
 		
 
