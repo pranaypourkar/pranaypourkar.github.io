@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Electronics</title>
+	<script type="text/javascript" src="scripts/jquery-3.3.1.js">
+	</script>
+
+   <script>
+
+
+ 		$( document ).ready(function() {
+    		
+        localStorage.setItem("color", "#ADD8E6");
+
+		   if(localStorage)
+			{
+				previous_cart = [];
+				var retrievedData = localStorage.getItem("Product_ID");
+                previous_cart = JSON.parse(retrievedData); 
+ 
+				if (previous_cart != null) 
+				{
+					for (var i = 0; i < previous_cart.length; i++) 
+					{
+					 
+					    var sel_btn = document.getElementById(previous_cart[i]);
+
+					    if (sel_btn != null) 
+					    {
+					    	sel_btn.style.backgroundColor = "#ADD8E6";
+					    }
+					     				   
+				    }
+				}
+				
+       		} 
+        	else{
+        	alert("Sorry, your browser do not support local storage.");
+        	}
+
+         
+		});
+
+
+		function add_to_cart(id) {
+
+			load_cart = [];
+            load_cart = JSON.parse(localStorage.getItem("Product_ID"));
+
+            if (load_cart == null) 
+            {
+            	load_cart = [];
+            }
+
+		    //change background color
+        	var btn = document.getElementById(id);
+        	btn.style.backgroundColor="#ADD8E6";
+		
+		 	function search(load_cart)
+   			{
+    		return load_cart == id;
+    		}
+    
+
+			if(localStorage)
+			{
+				if (load_cart.find(search)==undefined) 
+				{
+					load_cart.push(id);
+				}
+
+        		localStorage.setItem("Product_ID", JSON.stringify(load_cart));
+
+
+
+        		var a = document.getElementById('chng');
+				a.classList.remove('default');
+			    a.classList.add('open_popup');
+			    setTimeout(closePopup, 3000);
+
+       		} 
+        	else{
+        	alert("Sorry, your browser do not support local storage.");
+        	}
+
+		}
+
+		function view_cart_page() {
+
+				location.href = "F:/course/CGI_web/web/viewcart.html";
+		}
+
+		function closePopup() {
+			
+			var a = document.getElementById('chng');
+  			a.classList.add('default');
+		}
+
+
+	</script>
+
+	<style type="text/css">
+
+	   	.img {
+	     transition: transform .2s; /* Animation */
+	     margin: 0 auto;
+	    }
+		.img:hover{
+
+			  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+		}
+
+		@keyframes example {
+	  0%   {opacity: 1 ;}
+      25%  {opacity: 0.75;}
+      50%  {opacity: 0.50;}
+      75%  {opacity: 0.25;}
+      100% {opacity: 0; }
+	}
+
+
+	    .open_popup {
+	    	
+		        
+                color: black;
+			    font-size: 20px;
+			    padding: 20px;
+			    border: 3px solid grey;
+                border-radius: 5px;
+				animation-name: example;
+                animation-duration: 3s;
+                
+
+		}
+
+		.default {
+			opacity: 0;
+		
+		}
+
+		.popup {
+			text-align: center;
+			height: 50px;
+			padding-top: 50px;
+		}
+	</style>
+
+</head>
+<body>
+
+
+<h1 align="center" style="padding-bottom: 50px;">Electronics</h1>
+<table align="center">
+	
+	<tr>
+		<td><input type="image" class="img" src="images/electronics1.jpg" id="b1" width="220px" height="160px" style="padding-right: 100px; hover"></td>
+		<td><input type="image" class="img" src="images/electronics2.jpg" id="b2" width="220px" height="160px" style="padding-right: 100px"></td>
+		<td><input type="image" class="img" src="images/electronics3.jpg" id="b3" width="220px" height="160px" style="padding-right: 85.6px"></td>
+		<td><input type="image" class="img" src="images/electronics4.jpg" id="b4" width="220px" height="160px" style="padding-right: 0px"></td>
+	</tr>
+
+	<tr>
+		<td align="center" style="padding-right: 100px"><b>Panasonic&nbsp;HD&nbsp;LED&nbsp;TV</b></td>
+		<td align="center" style="padding-right: 100px"><b>Dell&nbsp;Inspiron&nbsp;Laptop</b></td>
+		<td align="center" style="padding-right: 85.6px;"><b>Nikon&nbsp;DSLR&nbsp;Camera</b></td>
+		<td><b style=" padding-left: 25px;">HP&nbsp;DeskJet&nbsp;Printer</b></td>
+	</tr>
+
+	<tr> 
+		<td>
+			<ul style="padding-left: 11px; width: 120px ;word-break:keep-all;">
+				<li>Brand:&nbsp;Panasonic</li>
+				<li>Model:&nbsp;24F201DX</li>
+				<li>Item&nbsp;Weight:&nbsp;3Kg</li>
+				<li>Product&nbsp;Dimensions:&nbsp;55x9x33.5cm</li>
+				<li>Screen&nbsp;Size:&nbsp;24Inches</li>
+				<li>Connector&nbsp;Type:&nbsp;usb,hdmi</li>
+				<h3><br><br>Rs.&nbsp;<b>9,990.00</b></h3>
+				<button id="21" onclick="add_to_cart(id)">Add&nbsp;to&nbsp;Cart</button>
+			</ul>
+		</td>
+		<td>
+			<ul style="padding-left: 11px; width: 120px; word-break:keep-all;">
+				<li>Brand:&nbsp;Dell</li>
+				<li>Series:&nbsp;Inspiron&nbsp;3567</li>
+				<li>Colour:&nbsp;Black</li>
+				<li>Screen&nbsp;Size&nbsp;15.5&nbsp;Inches</li>
+				<li>Processor&nbsp;Brand&nbsp;Intel</li>
+				<li>RAM&nbsp;Size:&nbsp;4GB</li>
+				<li>Memory&nbsp;Technology&nbsp;DDR4</li>
+				<li>Hard&nbsp;Drive&nbsp;Size&nbsp;1TB</li>
+				<h3>Rs.&nbsp;<b>30,384.00</b></h3>
+				<button id="22" onclick="add_to_cart(id)">Add&nbsp;to&nbsp;Cart</button>
+			</ul>
+		</td>
+		<td>
+			<ul style="padding-left: 11px; width: 120px;word-break:keep-all;">
+				<li>Brand:&nbsp;Nikon</li>
+				<li>Model&nbsp;D7200</li>
+				<li>Item&nbsp;Weight&nbsp;2.44Kg</li>
+				<li>Batteries&nbsp;Included&nbsp;Yes</li>
+				<li>Additional&nbsp;Features&nbsp;24.2&nbsp;MP</li>
+				<li>Battery&nbsp;Cell&nbsp;Composition&nbsp;Lithium<br>Ion</li>
+				<li>Connector&nbsp;Type&nbsp;WiFi,&nbsp;NFC</li>
+				<h3>Rs.&nbsp;<b>65,800.00</b></h3>
+				<button id="23" onclick="add_to_cart(id)">Add&nbsp;to&nbsp;Cart</button>
+			</ul>
+		</td>
+		<td>
+			<ul style="padding-left: 11px; width: 120px;word-break:keep-all;">
+				<li>Brand:&nbsp;HP</li>
+				<li>Colour&nbsp;Black</li>
+				<li>Screen&nbsp;Size&nbsp;2.2&nbsp;Inches</li>
+				<li>Item&nbsp;Weight&nbsp;5.61&nbsp;Kg</li>
+				<li>Operating&nbsp;System&nbsp;Windows</li>
+				<h3><br><br><br>Rs.&nbsp;<b>5999.00</b></h3>
+				<button id="24" onclick="add_to_cart(id)">Add&nbsp;to&nbsp;Cart</button>
+			</ul>
+		</td>
+	</tr>
+
+</table>
+
+	<div align="center" style="padding-right: 15px;"><button style=" width: 100px; background-color: #ADFF2F" onclick="view_cart_page()">View&nbsp;Cart</button></div>
+
+	<div class="popup">
+	<span id="chng" class="default">Product Added to Cart</span>
+    </div>
+</body>
+</html>

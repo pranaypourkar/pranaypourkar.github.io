@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>View Cart</title>
+  <script type="text/javascript" src="js/web.js"></script>
+	<script type="text/javascript" src="scripts/jquery-3.3.1.js">
+  </script>
+
+  <script>
+    cart = [];
+    $( document ).ready(function() 
+    {
+
+        var retrievedData = localStorage.getItem("Product_ID");
+
+        cart = JSON.parse(retrievedData); 
+
+       
+
+
+      if(cart != null)
+      {
+         total=0;
+         no_of_items = cart.length;
+         arr_cart_img = [];
+         price_list = [];
+         description_list = [];
+
+        for(var i=0;i<cart.length;i++)
+        {
+          function search(database)
+          {
+          return database.Product_ID == cart[i];
+          }
+          if (database.find(search)!=undefined) 
+         {
+          total = total + database.find(search).Price;
+          price_list.push(database.find(search).Price);
+          description_list.push(database.find(search).description);
+          arr_cart_img.push("F:/course/CGI_web/web/categories/" + database.find(search).img_location);
+         }
+ 
+        }
+        
+        
+        x = new Array(cart.length);
+        tableCreate();
+        table_payment();
+
+        document.getElementById('total_cost').innerHTML = cart.length;
+
+        }
+        else
+        {
+        	document.getElementById('total_cost').innerHTML = 0;
+        }
+
+
+   }); 
+
+
+function table_payment() 
+{
+	   var body = document.body,
+       tbl_pay  = document.createElement('table');
+       for(var i = 0; i < 3; i++)
+         {
+          var tr = tbl_pay.insertRow();
+          
+              var td = tr.insertCell();
+      
+              if(i==0)
+                {       
+                    td.setAttribute('rowSpan', '1');
+                    pic = document.createElement("IMG");
+                    pic.setAttribute("src","F:/course/CGI_web/web/images/cart_image.jpg");
+                    pic.setAttribute("width", "250");
+                    pic.setAttribute("height", "200");
+                    td.appendChild(document.body.appendChild(pic));
+                    td.setAttribute("align","center");
+                    td.style.paddingRight = "300px";
+
+                }
+               else if(i==1)
+                {
+                   td.appendChild(document.createTextNode("Amount Payable"));
+                   td.setAttribute("align","center");
+                   td.style.color = '#ADD8E6';
+                   td.style.fontWeight="bold";
+                   td.style.fontSize = "27px";
+                   td.style.paddingRight = "300px";
+                   td.style.paddingTop = "60px";
+
+                }
+                else if (i==2) 
+                {
+                	btn = document.createElement("BUTTON");        
+                    btn.setAttribute("id","make_paymnt")
+                    var t = document.createTextNode("Make Payment");      
+                    btn.appendChild(t);                                
+                    td.appendChild(document.createTextNode("Total Price: " + total + " Rs"));
+                    td.style.fontSize = "30px";
+                    td.style.paddingTop = "30px";
+                    linebreak = document.createElement("br");
+                    td.appendChild(linebreak);
+                    td.appendChild(document.body.appendChild(btn));
+                    td.setAttribute("align","center");
+                    td.style.paddingRight = "300px";
+                    btn.style.fontSize = "25px";
+                }
+                 
+
+                
+              
+                          
+            
+          }
+    tbl_pay.style.float = "right";
+    body.appendChild(tbl_pay);
+
+btn.onclick = function() 
+{
+	location.href = "F:/course/CGI_web/web/order.html";
+};
+
+
+}
+
+function order_page() 
+        {
+			location.href = "F:/course/CGI_web/web/order.html";
+		} 
+		
+
+
+function tableCreate()
+      {
+        var body = document.body,
+        tbl  = document.createElement('table');
+        tbl.setAttribute("align","center");
+        for(var i = 0; i < cart.length+1; i++)
+         {
+          var tr = tbl.insertRow();
+          for(var j = 0; j < 4; j++)
+           {
+              var td = tr.insertCell();
+      
+              if(i==0)
+                {
+                 if(j==0)
+                  {
+                   td.appendChild(document.createTextNode("Items"));
+                   td.setAttribute("align","center");
+                   td.style.paddingRight = "70px";
+                   td.style.paddingLeft = "70px";
+                   td.style.color = '#ADD8E6';
+                   td.style.fontWeight="bold";
+                   td.style.fontSize = "25px";
+
+
+
+                  }
+                 else if(j==1){
+                   td.appendChild(document.createTextNode("Description"));
+                   td.setAttribute("align","center");
+                   td.style.paddingRight = "70px";
+                   td.style.paddingLeft = "70px";
+                   td.style.color = '#ADD8E6';
+                   td.style.fontWeight="bold";
+                   td.style.fontSize = "25px";
+                  }
+                 else if (j==2) 
+                  {
+                   td.appendChild(document.createTextNode("Price"));
+                   td.setAttribute("align","center");
+                   td.style.paddingRight = "70px";
+                   td.style.paddingLeft = "70px";
+                   td.style.color = '#ADD8E6';
+                   td.style.fontWeight="bold";
+                   td.style.fontSize = "25px";
+                  }
+
+                }
+              else
+               {
+                if(j==0)
+                 {   
+                   x[i-1] = document.createElement("IMG");
+                   x[i-1].setAttribute("src", arr_cart_img[i-1]);
+                   x[i-1].setAttribute("width", "180");
+                   x[i-1].setAttribute("height", "150");
+                   x[i-1].style.paddingRight = "70px";
+                   x[i-1].style.paddingLeft = "70px";
+                   x[i-1].setAttribute("align","center");
+                   td.appendChild(document.body.appendChild(x[i-1]));
+                 }
+                else if(j==1)
+                 {
+                  td.appendChild(document.createTextNode(description_list[i-1]));
+                  td.setAttribute("align","center");
+                  td.style.paddingRight = "70px";
+                  td.style.paddingLeft = "70px";
+
+                 }
+                else if(j==2)
+                 {
+                  td.appendChild(document.createTextNode(price_list[i-1]));
+                  td.setAttribute("align","center");
+                  td.style.paddingRight = "70px";
+                  td.style.paddingLeft = "70px";
+                 }
+                
+              }            
+            }
+         }
+
+
+        tbl.style.border = "3px solid black";
+        tbl.style.display = "inline-block";
+
+
+        
+
+        body.appendChild(tbl);
+        
+  
+      }
+
+		
+</script>
+ 
+<style type="text/css">
+	
+</style>
+
+
+
+</head>
+<body>
+<h2 style="text-align: center;">My Cart&nbsp;&nbsp;&nbsp;&nbsp;Total No. of items: <span id="total_cost"></span></h2>
+
+</body>
+</html>

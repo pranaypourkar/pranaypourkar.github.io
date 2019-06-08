@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="css/web.css">
+
+
+	<style>
+		table,td,tr,th {
+			 background-color: pink;
+			 border-style: dotted;
+			 border-color: #00FFFF
+		};
+
+
+		@keyframes example {
+	  0%   {opacity: 1 ;}
+      25%  {opacity: 0.75;}
+      50%  {opacity: 0.50;}
+      75%  {opacity: 0.25;}
+      100% {opacity: 0; }
+	}
+
+
+	    .open_popup {
+	    	
+		        
+                color: black;
+			    font-size: 20px;
+			    padding: 20px;
+			    border: 3px solid grey;
+                border-radius: 5px;
+				animation-name: example;
+                animation-duration: 3s;
+                
+
+		}
+
+		.default {
+			opacity: 0;
+		
+		}
+
+		.popup {
+			text-align: center;
+			height: 50px;
+			padding-top: 50px;
+		}
+
+
+		.discount {
+			font-size: 16px;
+			padding: 10px;
+			text-align: center;
+		}
+		          
+	</style>
+    <script type="text/javascript" src="js/web.js"></script>
+    <script type="text/javascript" src="scripts/jquery-3.3.1.js"></script>
+	<script type="text/javascript">
+
+
+		$( document ).ready(function() {
+    		
+        localStorage.setItem("color", "#ADD8E6");
+
+		   if(localStorage)
+			{
+				previous_cart = [];
+				var retrievedData = localStorage.getItem("Product_ID");
+                previous_cart = JSON.parse(retrievedData); 
+ 
+				if (previous_cart != null) 
+				{
+					for (var i = 0; i < previous_cart.length; i++) 
+					{
+					 
+					    var sel_btn = document.getElementById(previous_cart[i]);
+
+					    if (sel_btn != null) 
+					    {
+					    	sel_btn.style.backgroundColor = "#ADD8E6";
+					    }
+					     				   
+				    }
+				}
+				
+       		} 
+        	else{
+        	alert("Sorry, your browser do not support local storage.");
+        	}
+
+         
+		});
+
+		
+
+
+        function closePopup() {
+			
+			var a = document.getElementById('chng');
+  			
+  			a.classList.add('default');
+		}
+
+		function search_product() {
+			
+			var txtbox = document.getElementById('searchbox').value;
+			var btn = document.getElementById("searchbtn");
+
+			function search(database)
+   			{
+    		return database.description == txtbox;
+    		}
+    		if (database.find(search)!=undefined) 
+			{
+				
+    			location.href = database.find(search).page_location;
+			}
+			else
+			{
+				var a = document.getElementById('chng');
+				a.innerHTML = "Sorry, Product Does Not Exist";
+				a.classList.remove('default');
+			    a.classList.add('open_popup');
+			    setTimeout(closePopup, 3000);
+
+			}
+			
+
+		}
+
+
+
+		function add_to_cart(id) {
+
+			load_cart = [];
+            load_cart = JSON.parse(localStorage.getItem("Product_ID"));
+
+            if (load_cart == null) 
+            {
+            	load_cart = [];
+            }
+
+		    //change background color
+        	var btn = document.getElementById(id);
+        	btn.style.backgroundColor="#ADD8E6";
+		
+		 	function search(load_cart)
+   			{
+    		return load_cart == id;
+    		}
+    
+
+			if(localStorage)
+			{
+				if (load_cart.find(search)==undefined) 
+				{
+					load_cart.push(id);
+				}
+
+        		localStorage.setItem("Product_ID", JSON.stringify(load_cart));
+
+
+        		var a = document.getElementById('chng');
+				a.classList.remove('default');
+				a.innerHTML = "Product Added to Cart";
+			    a.classList.add('open_popup');
+			    setTimeout(closePopup, 3000);
+
+       		} 
+        	else{
+        	alert("Sorry, your browser do not support local storage.");
+        	}
+
+		}
+
+		function view_cart_page() {
+
+				location.href = "F:/course/CGI_web/web/viewcart.html";
+		}
+
+		function closePopup() {
+			
+			var a = document.getElementById('chng');
+  			a.classList.add('default');
+		}
+
+	</script>
+
+
+	
+
+</head>
+<body>
+<h1 style="text-align: center;">ABC&nbsp;Shopping&nbsp;Online</h1>
+<h3 align="center">Search&nbsp;For&nbsp;Products:&nbsp;<input type="text" style="width: 250px" id="searchbox">&nbsp;<input type="button" onclick="search_product();" id="searchbtn" value="Search"></h3>
+<hr>
+
+
+
+
+<div style="background-color: orange; font-size: 16px;" align="center"><b>Babies&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kids&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Men&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Women&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Senior&nbsp;Citizens</b></div>
+<ul>
+	<li><a href="categories/Dresses.html" style="font-size: 16px; padding: 10px;">Dresses</a></li>
+	<li><a href="categories/Shoes.html" style="font-size: 16px; padding: 10px;">Shoes</a></li>
+	<li><a href="categories/Electronics.html" style="font-size: 16px; padding: 10px;">Electronics</a></li>
+	<li><a href="categories/Mobiles.html" style="font-size: 16px; padding: 10px;">Mobiles</a></li>
+	<li><a href="categories/Bags.html" style="font-size: 16px; padding: 10px;">Bags</a></li>
+	<li><a href="categories/Music_CDs.html" style="font-size: 16px; padding: 10px;">Music CDs</a></li>
+	<li><a href="categories/Sports.html" style="font-size: 16px; padding: 10px;">Sports</a></li>
+</ul>
+
+<h3 style="text-align: center;">Current Product Offers</h3>
+<table align="center">
+	<tr>
+		<th class="discount">Item</th>
+		<th class="discount">Description</th>
+		<th class="discount">Price&nbsp;(Rs)</th>
+		<th class="discount">Discounts</th>
+		<th class="discount">Add&nbsp;to&nbsp;Cart</th>
+	</tr>
+	<tr>
+		<td class="discount">T-Shirt</td>
+		<td class="discount">Cub&nbsp;McPaws</td>
+		<td class="discount">700</td>
+		<td class="discount">100</td>
+		<td class="discount"><button id="20" onclick="add_to_cart(id)">Add&nbsp;to&nbsp;Cart</button></td>
+	</tr>
+	<tr>
+		<td class="discount">Shoes</td>
+		<td class="discount">Asian</td>
+		<td class="discount">3200</td>
+		<td class="discount">200</td>
+		<td class="discount"><button  id="28" onclick="add_to_cart(id)">Add&nbsp;to&nbsp;Cart</button></td>
+	</tr>
+	<tr>
+		<td class="discount">Mobile</td>
+		<td class="discount">Honor&nbsp;10&nbsp;Lite</td>
+		<td class="discount">18999</td>
+		<td class="discount">500</td>
+		<td class="discount"><button  id="4" onclick="add_to_cart(id)">Add&nbsp;to&nbsp;Cart</button></td>
+	</tr>
+</table>
+
+    <div class="popup">
+	<span id="chng" class="default"></span>
+    </div>
+
+    
+</body>
+</html>

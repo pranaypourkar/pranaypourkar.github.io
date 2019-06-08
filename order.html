@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Payment Page</title>
+	<link rel="stylesheet" type="text/css" href="css/web.css">
+	<script type="text/javascript">
+		function submitting()
+		{
+			var valid = true;
+
+			var mob = document.getElementById('mob').value;
+			if(mob.length!=10)
+			{
+				//alert("Check your mobile number");
+				var a = document.getElementById('chng');
+				a.innerHTML = "Check your mobile number";
+				a.classList.remove('default');
+			    a.classList.add('open_popup');
+			    setTimeout(closePopup, 1000);
+				valid = false;              
+			}
+			
+			var pin = document.getElementById('pincode').value;
+			if(pin.length!=6)
+			{
+				//alert("Check your pincode number");
+				var a = document.getElementById('chng');
+				a.innerHTML = "Check your pincode number";
+				a.classList.remove('default');
+			    a.classList.add('open_popup');
+			    setTimeout(closePopup, 1000);
+				valid = false;
+			}
+
+			var name = document.getElementById('name').value;
+			if(name.length<5)
+			{
+				//alert("Username must be atleast 5 characters long");
+				var a = document.getElementById('chng');
+				a.innerHTML = "Username must be atleast 5 characters long";
+				a.classList.remove('default');
+			    a.classList.add('open_popup');
+			    setTimeout(closePopup, 1000);
+
+				valid = false;
+			}
+
+			if (document.getElementById('NetBank').checked || document.getElementById('COD').checked || document.getElementById('card').checked) 
+			 {
+				var radio_option = document.getElementById('card');
+			    if(radio_option.checked)
+			     {
+
+				   var cvv = document.getElementById('cvv').value;
+				   var card_no = document.getElementById('card_no').value;
+				   var month = document.getElementById('month_status').value;
+				   var year = document.getElementById('year_status').value;
+
+
+				    if(cvv.length!=3)
+				     {
+					//alert("Check your cvv");
+				    	var a = document.getElementById('chng');
+				    	a.innerHTML = "Check your cvv";
+				    	a.classList.remove('default');
+				        a.classList.add('open_popup');
+				        setTimeout(closePopup, 1000);
+				    	valid = false;
+					 }
+                	else if(card_no.length!=16)
+					 {
+						//alert("Check your card number");
+						var a = document.getElementById('chng');
+						a.innerHTML = "Check your card number";
+						a.classList.remove('default');
+					    a.classList.add('open_popup');
+					    setTimeout(closePopup, 1000);
+						valid = false;
+					 }
+				    else if(month == "MM" || year == "YY")
+				     {
+				     	
+				    	//alert("Enter card expiry date");
+				    	var a = document.getElementById('chng');
+				    	a.innerHTML = "Enter card expiry date";
+				    	a.classList.remove('default');
+				        a.classList.add('open_popup');
+				        setTimeout(closePopup, 1000);
+				    	valid = false;
+				     }
+				    else
+				     {
+				     	var today = new Date();
+						var mm = today.getMonth() + 1; //January is 0!
+						var yyyy = today.getFullYear();
+
+						if(year<yyyy)
+						{
+							var a = document.getElementById('chng');
+				    	    a.innerHTML = "Card expired";
+				    	    a.classList.remove('default');
+				            a.classList.add('open_popup');
+				            setTimeout(closePopup, 1000);
+							valid = false;
+						}
+						else if (year == yyyy)
+						{
+							if(month<mm)
+							{
+								var a = document.getElementById('chng');
+				    	        a.innerHTML = "Card expired";
+				    	        a.classList.remove('default');
+				                a.classList.add('open_popup');
+				                setTimeout(closePopup, 1000);
+								valid = false;
+							}
+
+						}
+						else
+						{
+							valid = true;
+						}
+				    	
+				     }
+
+                 }
+			    else if ( document.getElementById('NetBank').checked || document.getElementById('COD').checked) 
+			     {
+			    	valid = true;
+			     }
+			    else    
+			    {
+			    	valid = false;
+			    }
+			 }
+			else
+			 {
+				//alert("Select payment option");
+				var a = document.getElementById('chng');
+				a.innerHTML = "Select payment option";
+				a.classList.remove('default');
+			    a.classList.add('open_popup');
+			    setTimeout(closePopup, 1000);
+
+				valid = false;
+			 }
+
+
+			
+
+			 
+
+			if(valid!=true)
+			{
+				event.preventDefault();
+                return valid;
+			}
+			else
+			{
+				//alert("Form submitted");
+				var a = document.getElementById('chng');
+				a.innerHTML = "Form submitted";
+				a.classList.remove('default');
+			    a.classList.add('open_popup');
+			    setTimeout(closePopup, 5000);
+			}
+
+
+
+		}
+
+		function closePopup() {
+			
+			var a = document.getElementById('chng');
+  			a.classList.add('default');
+		}
+
+		
+	</script>
+
+	<style type="text/css">
+
+	   	.img {
+	     transition: transform .2s; /* Animation */
+	     margin: 0 auto;
+	    }
+		.img:hover{
+
+			  transform: scale(1.5); 
+		}
+
+		@keyframes example {
+	  0%   {opacity: 1 ;}
+      25%  {opacity: 0.75;}
+      50%  {opacity: 0.50;}
+      75%  {opacity: 0.25;}
+      100% {opacity: 0; }
+	}
+
+
+	    .open_popup {
+	    	
+		        
+                color: black;
+			    font-size: 20px;
+			    padding: 20px;
+			    border: 3px solid grey;
+                border-radius: 5px;
+				animation-name: example;
+                animation-duration: 3s;
+                
+
+		}
+
+		.default {
+			opacity: 0;
+		
+		}
+
+		.popup {
+			text-align: center;
+			height: 50px;
+			padding-top: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div style="padding-top: 20px; padding-bottom: 10px;"><span style="background-color: blue; color: white; padding: 10px;"><b>DELIVERY ADDRESS</b></span><span  style="color: blue; padding-left: 150px;">Enter&nbsp;Delivery&nbsp;Details&nbsp;in&nbsp;the&nbsp;form&nbsp;below</span></div>
+
+	<form name="helloform" method="GET" onsubmit="submitting();">
+
+		<table align="center" style="border-radius: 10px; border: 2px solid #00FFFF; padding: 15px;">
+			<tr>
+				<td><input type="text" id="name" placeholder="  Name" style="border: 0.5px solid grey;" required></td>
+				<td><input type="number" name="num" id="mob" placeholder="  10-digit mobile number" style="border: 0.5px solid grey"  required></td>
+			</tr>
+			<tr>
+				<td><input type="number" name="pin" id="pincode" placeholder="  Pincode" style="border: 0.5px solid grey" size="30px" required></td>
+				<td><input type="email" name="email" placeholder="  Email" style="border: 0.5px solid grey" required></td>
+			</tr>
+			<tr>
+				<td rowspan="2" colspan="2"><textarea placeholder=" Address" style="border: 0.5px solid grey; width: 335px; height: 27px;" required></textarea></td>
+			</tr>
+		</table>
+	
+		<p><span style="background-color: blue; color: white; padding: 10px;"><b>PAYMENT OPTIONS</b></span><span><table align="center" style="border-radius: 10px; border: 2px solid #00FFFF; padding: 15px;">
+				<tr>
+					<td style="border-h"><input type="radio" id="card" name="paymnt">Credit/Debit Card</td>
+				</tr>
+				<tr>
+					<td><input type="number" id="card_no" placeholder="Enter Card Number" ></td>
+				</tr>
+				<tr>
+					<td style="border: 1px black">Expiry&nbsp;<select id="month_status">
+						<option><b>MM</b></option>
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+						<option>6</option>
+						<option>7</option>
+						<option>8</option>
+						<option>9</option>
+						<option>10</option>
+						<option>11</option>
+						<option>12</option>
+					</select>
+					<select id="year_status">
+						<option><b>YY</b></option>
+						<option>2016</option>
+						<option>2017</option>
+                        <option>2018</option>
+						<option>2019</option>
+						<option>2020</option>
+						<option>2021</option>
+						<option>2022</option>
+						<option>2023</option>
+						<option>2024</option>
+						<option>2025</option>
+						<option>2026</option>
+						<option>2027</option>
+						<option>2028</option>
+						<option>2029</option>
+					</select>
+
+
+				    </td>
+					<td><span style="size: 10px"><input type="number" id="cvv" placeholder="CVV"></span></td>
+				</tr>
+				<tr>
+					<td><input type="radio"  id="NetBank" name="paymnt">Net Banking</td>
+				</tr>
+				<tr>
+					<td><input type="radio" id="COD" name="paymnt">Cash on Delivery</td>
+					<td><button onclick="submit" name="btn" style="color:blue;background-color: white; border: 2px solid red;">Make Payment</button></td>
+				</tr>
+			</table>
+		</span>
+
+		</p>		
+	</form>
+
+
+	<div class="popup">
+	<span id="chng" class="default"></span>
+ </div>
+
+</body>
+</html>
