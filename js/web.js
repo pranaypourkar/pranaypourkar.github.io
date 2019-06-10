@@ -30,10 +30,10 @@ var database = [];
   		database.push({Product_ID:"20",Price:300,img_location:"images/Dress4.jpg",description:"Cub McPaws T-shirt",page_location:"categories/Dresses.html"});
 
   		//electronics
-  		database.push({Product_ID:"21",Price:9990,img_location:"images/electronics1.jpg",description:"Panasonic HD LED TV",page_location:"categories/Electronics.html"}); 
-  		database.push({Product_ID:"22",Price:30384,img_location:"images/electronics2.jpg",description:"Dell Inspiron Laptop",page_location:"categories/Electronics.html"});
-  		database.push({Product_ID:"23",Price:65800,img_location:"images/electronics3.jpg",description:"Nikon DSLR Camera",page_location:"categories/Electronics.html"}); 
-  		database.push({Product_ID:"24",Price:5999,img_location:"images/electronics4.jpg",description:"HP DeskJet Printer",page_location:"categories/Electronics.html"});
+  		database.push({Product_ID:"21",Price:9990,img_location:"images/Electronics1.jpg",description:"Panasonic HD LED TV",page_location:"categories/Electronics.html"}); 
+  		database.push({Product_ID:"22",Price:30384,img_location:"images/Electronics2.jpg",description:"Dell Inspiron Laptop",page_location:"categories/Electronics.html"});
+  		database.push({Product_ID:"23",Price:65800,img_location:"images/Electronics3.jpg",description:"Nikon DSLR Camera",page_location:"categories/Electronics.html"}); 
+  		database.push({Product_ID:"24",Price:5999,img_location:"images/Electronics4.jpg",description:"HP DeskJet Printer",page_location:"categories/Electronics.html"});
 
   		//shoes
   		database.push({Product_ID:"25",Price:1875,img_location:"images/shoe1.jpg",description:"Red Tape",page_location:"categories/Shoes.html"}); 
